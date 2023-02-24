@@ -2,8 +2,8 @@
   <li>
     <input type="checkbox" :checked="todo.isCompleted" @input="$emit('toggle-complete', index)" />
     <div class="todo">
-      <input v-if="todo.isEditing" type="text" :value="todo.todo" />
-      <span v-else>
+      <input v-if="todo.isEditing" type="text" :value="todo.todo" @input="$emit('update-todo', $event.target.value, index)" />
+      <span v-else :class="{'completed-todo' : todo.isCompleted}">
         {{ todo.todo }}
       </span>
     </div>
@@ -14,6 +14,7 @@
           color="#41b080"
           class="icon"
           width="22"
+          @click="$emit('edit-todo', index)"
       />
       <Icon
           v-else
@@ -21,8 +22,9 @@
           color="#41b080"
           class="icon"
           width="22"
+          @click="$emit('edit-todo', index)"
       />
-      <Icon icon="ph:trash" color="#f95e5e" class="icon" width="22"/>
+      <Icon icon="ph:trash" color="#f95e5e" class="icon" width="22" />
     </div>
   </li>
 </template>
@@ -40,7 +42,7 @@ const props = defineProps({
     required: true,
   },
 });
-defineEmits(['toggle-complete']);
+defineEmits(["toggle-complete", "edit-todo", "edit-todo"]);
 </script>
 
 <style lang="scss" scoped>
@@ -74,6 +76,10 @@ li {
 
   .todo {
     flex: 1;
+
+    .completed-todo {
+      text-decoration: line-through;
+    }
 
     input[type="text"] {
       width: 100%;

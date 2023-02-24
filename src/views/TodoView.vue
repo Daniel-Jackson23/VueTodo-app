@@ -16,7 +16,15 @@ const createTodo = (todo) => {
   });
 };
 const toggleTodoComplete = (todoPos) => {
-  todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted
+  todoList.value[todoPos].isCompleted = !todoList.value[todoPos].isCompleted;
+};
+
+const toggleEditTodo = (todoPos) => {
+  todoList.value[todoPos].isEditing = !todoList.value[todoPos].isEditing;
+};
+
+const updateTodo = (todoVal, todoPos) => {
+  todoList.value[todoPos].todo = todoVal;
 };
 </script>
 
@@ -26,11 +34,12 @@ const toggleTodoComplete = (todoPos) => {
     <TodoCreator @create-todo="createTodo"/>
     <ul class="todo-list" v-if="todoList.length > 0">
       <TodoItem
-        v-for="(todo, index) in todoList"
-        :todo="todo"
-        :index="index"
-        @toggle-complete="toggleTodoComplete"
-      />
+          v-for="(todo, index) in todoList"
+          :todo="todo"
+          :index="index"
+          @toggle-complete="toggleTodoComplete"
+          @edit-todo="toggleEditTodo"
+          @update-todo="updateTodo"></TodoItem>
     </ul>
     <p class="todos-msg" v-else>
       <Icon icon="akar-icons:face-very-sad" width="22"/>
