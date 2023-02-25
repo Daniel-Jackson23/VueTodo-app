@@ -2,7 +2,7 @@
   <header>
     <nav class="container">
       <div class="branding">
-        <img src="../assets/Vue_Logo_Black.png" alt="Logo"/>
+        <img src="../assets/todoimage.jpg" alt="Logo"/>
         <h1>Todo List</h1>
       </div>
       <ul class="nav-routes">
